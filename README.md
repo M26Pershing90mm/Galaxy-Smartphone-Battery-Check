@@ -1,0 +1,1 @@
+# Galaxy-Smartphone-Battery-Check
