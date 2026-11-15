@@ -6,6 +6,8 @@
 
 Galaxy Battery Check is a Windows battery diagnostic information viewer for Samsung Galaxy smartphones. It uses Android Debug Bridge (ADB) to read available battery information without root access. The application is independent and not endorsed by Samsung Electronics.
 
+![Galaxy Battery Check v1.4.8](docs/GalaxyBatteryCheck-v1.4.8.png)
+
 ## Features
 
 - BSOH and ASOC displayed separately when the device provides them
