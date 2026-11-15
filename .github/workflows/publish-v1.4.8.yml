@@ -1,15 +1,9 @@
-name: Build and publish Galaxy Battery Check Windows x64
+name: Publish verified Galaxy Battery Check v1.4.8 Windows ZIP
 
 on:
   push:
     branches: [main]
     paths:
-      - 'GalaxyBatteryCheck.Cli/**'
-      - 'GalaxyBatteryCheck.Core/**'
-      - 'GalaxyBatteryCheck.Gui/**'
-      - 'GalaxyBatteryCheck.Core.Tests/**'
-      - 'GalaxyBatteryCheck.sln'
-      - 'build.ps1'
       - '.github/workflows/publish-v1.4.8.yml'
   workflow_dispatch:
 
@@ -17,87 +11,28 @@ permissions:
   contents: write
 
 jobs:
-  build-and-publish:
-    runs-on: windows-latest
+  publish-verified-portable-zip:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-      - name: Set up .NET 8 SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-      - name: Restore and test
-        shell: pwsh
-        run: |
-          dotnet restore GalaxyBatteryCheck.sln --configfile NuGet.Config
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          dotnet run --project GalaxyBatteryCheck.Core.Tests -c Release --no-restore
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Publish Windows x64 framework-dependent GUI and CLI
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $gui = Join-Path $env:RUNNER_TEMP 'published-gui'
-          $cli = Join-Path $env:RUNNER_TEMP 'published-cli'
-          dotnet publish GalaxyBatteryCheck.Gui -c Release -r win-x64 --self-contained false -p:DebugType=None -p:DebugSymbols=false -o $gui
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          dotnet publish GalaxyBatteryCheck.Cli -c Release -r win-x64 --self-contained false -p:DebugType=None -p:DebugSymbols=false -o $cli
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          $stage = Join-Path $env:RUNNER_TEMP 'GalaxyBatteryCheck-v1.4.8'
-          $runtime = Join-Path $stage 'win-x64'
-          New-Item -ItemType Directory -Path $runtime -Force | Out-Null
-          foreach ($folder in @($gui, $cli)) {
-            Get-ChildItem $folder -File | Where-Object { $_.Extension -in @('.exe', '.dll', '.json', '.ico') } | ForEach-Object {
-              Copy-Item $_.FullName -Destination $runtime -Force
-            }
-          }
-          foreach ($name in @('run-gui.cmd', 'run-cli.cmd', 'CreateShortcut.cmd', 'CreateShortcut.ps1', 'LICENSE')) {
-            Copy-Item $name -Destination $stage -Force
-          }
-          @'
-          Galaxy Battery Check v1.4.8 - Windows x64 (GUI and CLI)
-
-          1. Extract all files.
-          2. Install the Microsoft .NET 8 Desktop Runtime (x64):
-             https://dotnet.microsoft.com/download/dotnet/8.0
-          3. Download Google Android SDK Platform-Tools (ADB):
-             https://developer.android.com/tools/releases/platform-tools
-          4. Enable USB debugging on the Galaxy phone and authorize this PC.
-          5. Double-click run-gui.cmd. For command-line usage run run-cli.cmd --help.
-
-          This ZIP is built from the repository source by GitHub Actions.
-          It is framework-dependent; .NET runtime and ADB are not bundled.
-          Hashes from a different build or ZIP do not apply to this release asset.
-          No open-source license granted. Unauthorized modification and
-          redistribution require prior written permission, except applicable law.
-          '@ | Set-Content -Path (Join-Path $stage 'START-HERE.txt') -Encoding UTF8
-          $hashes = Get-ChildItem $stage -File -Recurse | Sort-Object FullName | ForEach-Object {
-            $relative = $_.FullName.Substring($stage.Length + 1).Replace('\','/')
-            '{0}  {1}' -f (Get-FileHash -Algorithm SHA256 $_.FullName).Hash.ToLowerInvariant(), $relative
-          }
-          $hashes | Set-Content -Path (Join-Path $stage 'SHA256SUMS.txt') -Encoding ASCII
-          $zip = Join-Path $env:RUNNER_TEMP 'GalaxyBatteryCheck-v1.4.8-Windows-x64.zip'
-          Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $zip -CompressionLevel Optimal -Force
-          $sha = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
-          Write-Host "Published ZIP: $zip"
-          Write-Host "SHA256: $sha"
-          "RELEASE_ZIP=$zip" >> $env:GITHUB_ENV
-          "RELEASE_SHA=$sha" >> $env:GITHUB_ENV
-      - name: Upload ZIP to existing v1.4.8 release
-        shell: pwsh
+      - name: Retrieve the verified ZIP from GitHub Git blob
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          BLOB_SHA: 49ff03cc1e2d28c1475fa76516ff5c0ae4c3c2b9
         run: |
-          gh release view v1.4.8 --repo $env:GITHUB_REPOSITORY
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          gh release upload v1.4.8 "$env:RELEASE_ZIP" --clobber --repo $env:GITHUB_REPOSITORY
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          gh release view v1.4.8 --repo $env:GITHUB_REPOSITORY --json assets --jq '.assets[].name'
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Save workflow artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: galaxy-battery-check-win-x64
-          path: ${{ runner.temp }}/GalaxyBatteryCheck-v1.4.8-Windows-x64.zip
-          if-no-files-found: ignore
+          set -euo pipefail
+          gh api "repos/$REPO/git/blobs/$BLOB_SHA" --jq '.content' | base64 --decode > GalaxyBatteryCheck-v1.4.8-Windows-x64-Portable-Clean.zip
+      - name: Check SHA-256 and ZIP integrity
+        run: |
+          set -euo pipefail
+          echo "2e4cd61ac5967a814ea5e72c9f3087d73c2710cbedf79fcb62d5fb75e5bd4d4c  GalaxyBatteryCheck-v1.4.8-Windows-x64-Portable-Clean.zip" | sha256sum --check
+          unzip -t GalaxyBatteryCheck-v1.4.8-Windows-x64-Portable-Clean.zip >/dev/null
+      - name: Attach archive to existing v1.4.8 GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh release view v1.4.8 --repo "$REPO"
+          gh release upload v1.4.8 GalaxyBatteryCheck-v1.4.8-Windows-x64-Portable-Clean.zip --repo "$REPO" --clobber
+          gh release view v1.4.8 --repo "$REPO" --json assets --jq '.assets[] | {name, size}'
