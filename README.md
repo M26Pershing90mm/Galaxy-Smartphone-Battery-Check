@@ -1,8 +1,47 @@
 # Galaxy Battery Check — Samsung Galaxy Battery Health Checker
 
-**v1.4.8 · Windows 10/11 · C# / .NET 8 · ADB · 비공식 / Unofficial**
+**v1.4.8 | Windows 10/11 | C# / .NET 8 | ADB | Unofficial**
 
-[한국어](#한국어) | [English](#english) | [저작권 안내](#저작권-및-무단-수정재배포-금지) | [VirusTotal](#virustotal-검사-결과--virustotal-file-reports) | [Releases](https://github.com/M26Pershing90mm/Galaxy-Smartphone-Battery-Check/releases)
+[한국어](#한국어) · [English](#english) · [Binaries / Download](#binaries--download) · [Building](#building) · [License](#저작권-및-무단-수정재배포-금지) · [VirusTotal](#virustotal-검사-결과--파일-무결성)
+
+Galaxy Battery Check is a Windows battery diagnostic information viewer for Samsung Galaxy smartphones. It uses Android Debug Bridge (ADB) to read available battery information without root access. The application is independent and not endorsed by Samsung Electronics.
+
+## Features
+
+- BSOH and ASOC displayed separately when the device provides them
+- Battery temperature, charge level, cycle count, and available capacity information
+- Automatic device discovery and selection of multiple connected devices
+- Read-only diagnostics with an optional JSON report
+- Windows Forms GUI and command-line interface
+- Korean, English, and Japanese localization
+
+## Binaries / Download
+
+**Latest release: [Galaxy Battery Check v1.4.8](https://github.com/M26Pershing90mm/Galaxy-Smartphone-Battery-Check/releases/tag/v1.4.8)**
+
+Use the **Assets** section of the release page to obtain the complete portable distribution ZIP when it is attached. The GitHub repository's **Code → Download ZIP** contains repository sources, not necessarily the compiled Windows program. Do not download or execute unverified copies from other distributors.
+
+Extract the entire release archive, then launch `run-gui.cmd` or `win-x64/GalaxyBatteryCheck.exe`. Official [Android SDK Platform-Tools](https://developer.android.com/tools/releases/platform-tools) and USB debugging authorization are required.
+
+## Building
+
+Build requirements: Windows and the **.NET 8 SDK** (the Desktop Runtime alone is insufficient).
+
+```powershell
+.\build.cmd
+# Include the .NET runtime in the Windows x64 portable build:
+.\build.cmd -SelfContained
+```
+
+Additional build, CLI, and ADB instructions are provided in the Korean and English sections below.
+
+## License and permitted use
+
+**No open-source license is granted.** Unauthorized modification, redistribution, reuploading, mirroring, and commercial reuse are prohibited without the copyright holder's prior written permission, subject to applicable legal exceptions and GitHub's Terms of Service.
+
+See [LICENSE](LICENSE) and [저작권 및 무단 수정·재배포 금지](#저작권-및-무단-수정재배포-금지).
+
+---
 
 > **비공식 프로그램 고지:** 삼성전자가 제작하거나 공식 승인·인증·후원한 프로그램이 아닙니다. 배터리 진단 결과는 참고용이며 삼성전자 서비스센터의 정밀 검사와 동일하지 않습니다. 삼성 및 Galaxy는 해당 권리자의 상표입니다.
 
