@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaxyBatteryCheck.Core", "GalaxyBatteryCheck.Core\GalaxyBatteryCheck.Core.csproj", "{A81AE673-BC4F-4A62-848A-C03F903A93FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaxyBatteryCheck.Cli", "GalaxyBatteryCheck.Cli\GalaxyBatteryCheck.Cli.csproj", "{9C504C5C-42A8-4E4A-937E-C82C7A7C9AD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaxyBatteryCheck.Core.Tests", "GalaxyBatteryCheck.Core.Tests\GalaxyBatteryCheck.Core.Tests.csproj", "{28419D5D-77AE-409A-9E9C-5F4CD60688B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaxyBatteryCheck.Gui", "GalaxyBatteryCheck.Gui\GalaxyBatteryCheck.Gui.csproj", "{6E6A2D63-4C2C-4C1C-9B6B-8C2C6B5B9B11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A81AE673-BC4F-4A62-848A-C03F903A93FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A81AE673-BC4F-4A62-848A-C03F903A93FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A81AE673-BC4F-4A62-848A-C03F903A93FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A81AE673-BC4F-4A62-848A-C03F903A93FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C504C5C-42A8-4E4A-937E-C82C7A7C9AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C504C5C-42A8-4E4A-937E-C82C7A7C9AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C504C5C-42A8-4E4A-937E-C82C7A7C9AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C504C5C-42A8-4E4A-937E-C82C7A7C9AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28419D5D-77AE-409A-9E9C-5F4CD60688B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28419D5D-77AE-409A-9E9C-5F4CD60688B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28419D5D-77AE-409A-9E9C-5F4CD60688B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28419D5D-77AE-409A-9E9C-5F4CD60688B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E6A2D63-4C2C-4C1C-9B6B-8C2C6B5B9B11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E6A2D63-4C2C-4C1C-9B6B-8C2C6B5B9B11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E6A2D63-4C2C-4C1C-9B6B-8C2C6B5B9B11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E6A2D63-4C2C-4C1C-9B6B-8C2C6B5B9B11}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

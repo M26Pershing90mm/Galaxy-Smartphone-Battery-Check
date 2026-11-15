@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\GalaxyBatteryCheck.Core\GalaxyBatteryCheck.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="testdata\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>1.4.8</Version>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyVersion>1.4.8.0</AssemblyVersion>
+    <FileVersion>1.4.8.0</FileVersion>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
