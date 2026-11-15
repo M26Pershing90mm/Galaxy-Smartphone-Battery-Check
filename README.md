@@ -4,8 +4,6 @@
 
 [한국어](#한국어) | [English](#english) | [저작권 안내](#저작권-및-무단-수정재배포-금지) | [VirusTotal](#virustotal-검사-결과--virustotal-file-reports) | [Releases](https://github.com/M26Pershing90mm/Galaxy-Smartphone-Battery-Check/releases)
 
-![Galaxy Battery Check v1.4.8 실행 화면](docs/GalaxyBatteryCheck-v1.4.8.png)
-
 > **비공식 프로그램 고지:** 삼성전자가 제작하거나 공식 승인·인증·후원한 프로그램이 아닙니다. 배터리 진단 결과는 참고용이며 삼성전자 서비스센터의 정밀 검사와 동일하지 않습니다. 삼성 및 Galaxy는 해당 권리자의 상표입니다.
 
 ## 한국어
@@ -117,7 +115,7 @@ Get-FileHash -Algorithm SHA256 ".\win-x64\GalaxyBatteryCheck.exe"
 
 ### 저작권 및 무단 수정·재배포 금지
 
-**별도의 오픈소스 라이선스를 부여하지 않습니다(No License Granted).** Galaxy Battery Check 및 본 프로젝트에서 저작권자가 소유한 소스 코드·실행 파일·문서·이미지의 권리는 ****로 보호됩니다.
+**별도의 오픈소스 라이선스를 부여하지 않습니다(No License Granted).** Galaxy Battery Check 및 본 프로젝트에서 저작권자가 소유한 소스 코드·실행 파일·문서·이미지는 저작권자의 사전 서면 허가 없이 수정·재배포할 수 없습니다.
 
 - **무단 수정 금지:** 저작권자의 사전 서면 허락 없이 소스 코드 또는 실행 파일을 수정·개작하거나, 수정본을 공개·배포하는 것을 허용하지 않습니다.
 - **무단 배포 금지:** 원본 또는 수정본의 실행 파일, 소스 코드 및 배포 ZIP을 허락 없이 재배포·미러링·재업로드하거나 제삼자에게 배포하는 것을 허용하지 않습니다.
@@ -143,7 +141,7 @@ dotnet run --project GalaxyBatteryCheck.Core.Tests -c Release --no-restore
 dotnet run --project GalaxyBatteryCheck.Core.Tests -c Release --no-restore -- --adb "C:\platform-tools\adb.exe"
 ```
 
-소스에 `VALIDATION.md`, `VALIDATION-1.4.8.md`, `검사-빌드-검증보고서.md`가 있습니다. 과거 보고서의 주장과 현재 머신에서 직접 재검증한 결과는 구분해야 합니다. **실제 스마트폰 연결, 모든 모델 호환성, 사용자 Windows에서의 GUI 실행은 각 환경에서 별도 확인이 필요합니다.**
+소스 패키지에는 `VALIDATION.md`, `VALIDATION-1.4.8.md`, `검사-빌드-검증보고서.md`가 포함됩니다. 과거 보고서의 주장과 현재 머신에서 직접 재검증한 결과는 구분해야 합니다. **실제 스마트폰 연결, 모든 모델 호환성, 사용자 Windows에서의 GUI 실행은 각 환경에서 별도 확인이 필요합니다.**
 
 ### 저장소 업그레이드 / GitHub 교체
 
@@ -191,6 +189,6 @@ The two submitted VirusTotal links correspond to **different files**, and each S
 
 ---
 
-Developed by **Sakai** ·   
+Developed by **Sakai**  
 Blog: https://wezard4u.tistory.com/ · Optional donations: [Toonation](https://toon.at/donate/637833976686140024) / [Ko-fi](https://ko-fi.com/sakai38666)  
 Copyright and restrictions: [LICENSE](LICENSE). Release distribution: [Releases](https://github.com/M26Pershing90mm/Galaxy-Smartphone-Battery-Check/releases).
